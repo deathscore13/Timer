@@ -16,12 +16,12 @@ require('Timer/Timer.php');
 
 function timer1(): void
 {
-	echo('timer1: '.microtime(true).PHP_EOL);
+    echo('timer1: '.microtime(true).PHP_EOL);
 }
 
 function timer2(Timer $t): void
 {
-	echo('timer2: '.microtime(true).PHP_EOL);
+    echo('timer2: '.microtime(true).PHP_EOL);
     echo('таймеров в очереди: '.$t->count().PHP_EOL);
 }
 
