@@ -81,7 +81,10 @@ class Timer
         $i = -1;
         $time = microtime(true);
         while (++$i < $this->count && bccomp($this->times[$i], $time, $this->scale) < 1)
+        {
+            $this->count--;
             $this->callbacks[$i](...$this->args[$i]);
+        }
         
         if ($i)
         {
@@ -90,8 +93,6 @@ class Timer
             array_splice($this->args, 0, $i);
             array_splice($this->hashes, 0, $i);
             array_splice($this->seconds, 0, $i);
-            
-            $this->count -= $i;
         }
     }
 
@@ -234,12 +235,13 @@ class Timer
 
     /**
      * Ожидание выполнения всех callback функций
-     * НЕ ИСПОЛЬЗУЙТЕ ЭТО ПРИ declare(ticks = 0)
      * 
      * @param Timer $timer              Объект таймера
      */
     public static function wait(Timer $timer): void
     {
+        declare(ticks = 1);
+
         $i = PHP_INT_MIN;
         while ($timer->count())
         {
@@ -252,13 +254,14 @@ class Timer
 
     /**
      * Ожидание выполнения callback функции
-     * НЕ ИСПОЛЬЗУЙТЕ ЭТО ПРИ declare(ticks = 0)
      * 
      * @param Timer $timer              Объект таймера
      * @param string $hash              Хеш таймера
      */
     public static function waitEx(Timer $timer, string $hash): void
     {
+        declare(ticks = 1);
+        
         $i = PHP_INT_MIN;
         while (!$timer->status($hash))
         {

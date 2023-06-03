@@ -1,7 +1,8 @@
 # Timer
 ### Таймеры для PHP 8.0.0+<br><br>
 
-Советую открыть **`Timer.php`** и почитать описания методов
+Советую открыть **`Timer.php`** и почитать описания методов<br><br>
+Рекомендую также ознакомиться со [справочником по declare](https://www.php.net/manual/ru/control-structures.declare.php)
 
 <br><br>
 ## Ограничения PHP
@@ -25,8 +26,7 @@ function timer2(Timer $t): void
     echo('таймеров в очереди: '.$t->count().PHP_EOL);
 }
 
-declare(ticks = 1)
-{
+declare(ticks = 1);
 
 // создание объекта таймера
 $t = new Timer();
@@ -39,6 +39,4 @@ $t->add(0.5, 'timer2', $t);
 
 // ожидание выполнения всех callback функций
 Timer::wait($t);
-
-}
 ```
