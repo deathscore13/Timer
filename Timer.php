@@ -137,7 +137,7 @@ class Timer
      * 
      * @param string $hash              Хеш таймера
      */
-    private function remove(string $hash): void
+    public function remove(string $hash): void
     {
         $i = -1;
         while (isset($this->hashes[++$i]))
